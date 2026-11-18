@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "prompt_version": "v1",
+    "model": "gemini-flash-lite-latest",
+    "dataset_version": "1.0.0",
+    "timestamp": "2026-11-18T01:28:38+00:00"
+  },
+  "summary": {
+    "total": 4,
+    "passed": 4,
+    "pass_rate": 1.0,
+    "errors": 0,
+    "avg_summary_score": 5.0,
+    "avg_latency_s": 0.867,
+    "total_tokens": 645
+  },
+  "results": [
+    {
+      "id": "acct-001",
+      "difficulty": "hard",
+      "edge_type": "typos",
+      "expected_category": "account",
+      "predicted_category": "account",
+      "category_match": true,
+      "predicted_summary": "Customer cannot access their account because the password reset email is not arriving.",
+      "expected_summary": "Customer cannot access their account and is not receiving the password reset email.",
+      "summary_score": 5,
+      "judge_reason": "The candidate summary captures the exact same meaning as the reference summary.",
+      "raw": "{\"category\": \"account\", \"summary\": \"Customer cannot access their account because the password reset email is not arriving.\"}",
+      "error": null,
+      "latency_s": 0.6100442999741063,
+      "prompt_tokens": 136,
+      "completion_tokens": 25
+    },
+    {
+      "id": "bill-001",
+      "difficulty": "easy",
+      "edge_type": null,
+      "expected_category": "billing",
+      "predicted_category": "billing",
+      "category_match": true,
+      "predicted_summary": "The customer was charged twice on March 3rd and is requesting a refund for the duplicate transaction.",
+      "expected_summary": "Customer was charged twice on March 3rd and requests a refund of the duplicate.",
+      "summary_score": 5,
+      "judge_reason": "The candidate summary captures the exact meaning and key points of the reference summary accurately.",
+      "raw": "{\"category\": \"billing\", \"summary\": \"The customer was charged twice on March 3rd and is requesting a refund for the duplicate transaction.\"}",
+      "error": null,
+      "latency_s": 0.8750331000192091,
+      "prompt_tokens": 144,
+      "completion_tokens": 31
+    },
+    {
+      "id": "bill-002",
+      "difficulty": "hard",
+      "edge_type": "very_short",
+      "expected_category": "billing",
+      "predicted_category": "billing",
+      "category_match": true,
+      "predicted_summary": "Customer is requesting a refund.",
+      "expected_summary": "Customer asks about a refund with no further detail.",
+      "summary_score": 5,
+      "judge_reason": "The candidate summary accurately captures the core meaning of the email, matching the reference summary.",
+      "raw": "{\"category\": \"billing\", \"summary\": \"Customer is requesting a refund.\"}",
+      "error": null,
+      "latency_s": 1.312128199962899,
+      "prompt_tokens": 126,
+      "completion_tokens": 17
+    },
+    {
+      "id": "tech-001",
+      "difficulty": "easy",
+      "edge_type": null,
+      "expected_category": "technical",
+      "predicted_category": "technical",
+      "category_match": true,
+      "predicted_summary": "Customer encounters an error 500 when clicking the export button.",
+      "expected_summary": "Customer gets a 500 error when using the export button.",
+      "summary_score": 5,
+      "judge_reason": "The candidate summary captures the exact same meaning and key point as the reference summary with identical accuracy.",
+      "raw": "{\"category\": \"technical\", \"summary\": \"Customer encounters an error 500 when clicking the export button.\"}",
+      "error": null,
+      "latency_s": 0.6708914000773802,
+      "prompt_tokens": 141,
+      "completion_tokens": 25
+    }
+  ]
+}

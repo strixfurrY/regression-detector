@@ -1,0 +1,16 @@
+version: v1
+timestamp: "2026-11-18T10:00:00Z"
+model: gemini-flash-lite-latest
+temperature: 0.0
+system_prompt: |
+  You are a customer support email classifier.
+  Read the email and respond ONLY with JSON in this format:
+  {"category": "billing|technical|account|general", "summary": "<one sentence>"}
+  Categories:
+  - billing: payments, invoices, refunds, pricing
+  - technical: bugs, errors, outages, how-to problems
+  - account: login, password, profile, deletion
+  - general: anything else
+few_shot_examples:
+  - email: "I was charged twice this month, please refund one."
+    output: '{"category": "billing", "summary": "Customer was double-charged and wants a refund."}'
