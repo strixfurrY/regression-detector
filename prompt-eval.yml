@@ -1,0 +1,53 @@
+name: Prompt regression check
+
+on:
+  pull_request:
+    paths:
+      - "prompts/**"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: Find the changed prompt version
+        id: ver
+        run: |
+          FILE=$(git diff --name-only --diff-filter=AM origin/${{ github.base_ref }}...HEAD -- prompts/ | head -n 1)
+          echo "Changed prompt file: $FILE"
+          VERSION=$(basename "$FILE" .yaml | sed 's/^classifier_//')
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Run evaluation and compare to baseline
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          REPORT_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: python -m src.ci ${{ steps.ver.outputs.version }}
+
+      - name: Post PR comment
+        if: always() && hashFiles('ci/comment.md') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh pr comment ${{ github.event.pull_request.number }} --body-file ci/comment.md
+
+      - name: Upload report
+        if: always() && hashFiles('reports/report.html') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: diff-report
+          path: reports/report.html

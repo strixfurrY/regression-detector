@@ -1,7 +1,7 @@
 import json
 from .classifier import client
 
-JUDGE_MODEL = "gemini-flash-lite-latest"
+JUDGE_MODEL = "gemini-3.1-flash-lite"
 
 JUDGE_PROMPT = """You grade summaries of customer support emails.
 Rate the CANDIDATE summary from 1 to 5 for how well it captures the key point of the email, using the REFERENCE summary as a guide.

@@ -1,6 +1,6 @@
 version: v1
 timestamp: "2026-11-18T10:00:00Z"
-model: gemini-flash-lite-latest
+model: gemini-3.1-flash-lite
 temperature: 0.0
 system_prompt: |
   You are a customer support email classifier.
